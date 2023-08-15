@@ -20,7 +20,7 @@ class DashboardController extends Controller
             $data = $request->all();
             /* echo "<pre>"; print_r($data); die; */
 
-        if ($data['accept'] == "on") {
+        if (!empty($data['accept'])) {
            //Validation
            $rules = [
             'name' => 'required|string|max:100',
@@ -58,7 +58,30 @@ class DashboardController extends Controller
             }
 
         }else {
+             //Validation
+             $rules = [
+                'email' => 'required|email|max:150|exists:users',
+                'password' => 'required',
+            ];
 
+            $customMessages =[
+                'email.required' => 'وارد کردن ایمیل الزامیست.',
+                'email.exists' => 'حساب کاربری برای ایمیل وارد شده وجود ندارد.',
+                'email.email' => 'فرمت وارد شده برای ایمیل صحیح نیست.',
+                'email.max' => 'آدرس ایمیل بیش از حد طولانی است.',
+                'password.required' => 'رمز عبور ورود به سیستم را وارد کنید.',
+            ];
+            $validator = Validator::make($data,$rules,$customMessages);
+            if ($validator->fails()) {
+                return Redirect::back()->withErrors($validator);
+            }
+
+            if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])) {
+                return redirect('dashboard');
+            }else {
+                $massage = 'نام کاربری یا رمز عبور وارد شده اشتباه است!';
+                return Redirect::back()->withErrors($massage);
+            }
         }
     }
 }
