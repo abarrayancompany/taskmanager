@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::match(['get','post'], '/','App\Http\Controllers\DashboardController@login');
+Route::get('/','App\Http\Controllers\DashboardController@index');
+Route::post('login-register','App\Http\Controllers\DashboardController@loginRegister');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
