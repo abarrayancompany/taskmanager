@@ -8,6 +8,9 @@ use App\Models\TaskType;
 use App\Models\User;
 use Session;
 use Auth;
+use Validator;
+use Redirect;
+use Carbon\Carbon;
 
 
 class TaskController extends Controller
@@ -21,34 +24,37 @@ class TaskController extends Controller
 
             if ($request->isMethod("post")) {
                 $data = $request->all();
-                echo "<pre>"; print_r($data); die;
+                /* echo "<pre>"; print_r($data); die; */
 
-            if (!empty($data['accept'])) {
             //Validation
             $rules = [
-                'name' => 'required|string|max:100',
-                'email' => 'required|email|max:150|unique:users',
-                'password' => 'required|min:6',
-                'accept' => 'required',
+                'title' => 'required|max:100',
+                'type' => 'required',
+                'status' => 'required',
+                'due_date' => 'required',
             ];
 
-            $customMessages =[
-                'name.required' => 'لطفا نام خود را وارد کنید.',
-                'name.string' => 'نام وارد شده صحیح نیست.',
-                'name.max' => 'نام وارد شده طولانی است .',
-                'email.required' => 'وارد کردن ایمیل الزامیست.',
-                'email.email' => 'فرمت وارد شده برای ایمیل صحیح نیست.',
-                'email.max' => 'آدرس ایمیل بیش از حد طولانی است.',
-                'email.unique' => 'این ایمیل قبلا ثبت شده است.',
-                'password.required' => 'برای حساب کاربری خود رمز عبور تعین کنید.',
-                'password.min' => 'حداقل کاراکتر مجاز برای رمز عبور 6 کاراکتر می‌باشد.',
-                'accept.required' => 'لطفا شرایط و قوانین عضویت در سایت را مطالعه و تایید کنید.',
+            $custommassages =[
+                'title.required' => 'برای وظیفه عنوان تعریف کنید.',
+                'title.max' => 'عنوان وارد شده طولانی است .',
+                'type.required' => 'نوع وظیفه مشخص نشده است.',
+                'status.required' => 'وضعیت وظیفه مشخص نشده است.',
+                'due_date.required' => 'تاریخ مشخص نشده است.',
             ];
-            $validator = Validator::make($data,$rules,$customMessages);
-            if ($validator->fails()) {
-                return Redirect::back()->withErrors($validator);
-            }
-        }
+            $this->validate($request,$rules,$custommassages);
+
+            //New Task
+            $task = New Task;
+            $task -> user_id = Auth::user()->id;
+            $task -> type_id = $data['type'];
+            $task -> title = $data['title'];
+            $task -> description = $data['description'];
+            $task -> status = $data['status'];
+            $task -> due_date = $data['due_date'];
+            $task -> created_at = Carbon::now();
+            $task -> updated_at = Carbon::now();
+            $task -> save();
+            return redirect('dashboard/tasks')->with('success_massage','وظیفه جدید ایجاد شد!');
     }
         //Get Task Types
         $types = TaskType::get()->toArray();

@@ -12,6 +12,7 @@
                     شما در این قسمت می‌توانید وظیفه جدید ایجاد کنید
                 </div>
             </div>
+            @include('_alert')
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
@@ -40,7 +41,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3 mb-md-0">
-                                    <input data-jdp class="form-control" id="title" name="title" type="text" placeholder="عنوان وظیفه را وارد کنید" />
+                                    <input data-jdp class="form-control" id="due_date" name="due_date" type="text" placeholder="تاریخ وظیفه را مشخص کنید" />
                                     <label for="inputFirstName">تاریخ انجام</label>
                                 </div>
                             </div>
@@ -68,5 +69,6 @@
             </div>
             <script>
                 jalaliDatepicker.startWatch();
+                separatorChars(object);
             </script>
 @endsection
