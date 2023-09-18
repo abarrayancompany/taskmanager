@@ -8,11 +8,17 @@ use App\Models\User;
 use Validator;
 use Redirect;
 use Auth;
+use Session;
 
 class DashboardController extends Controller
 {
     public function index () {
+        Session::put('page','dashboard');
+        if(Auth::check()) {
+            return view('dashboard');
+        }else {
         return view('index');
+        }
     }
 
     public function loginRegister(Request $request) {
@@ -85,4 +91,10 @@ class DashboardController extends Controller
         }
     }
 }
+
+    //logout
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
+    }
 }

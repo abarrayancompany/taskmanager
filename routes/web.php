@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','App\Http\Controllers\DashboardController@index');
 Route::post('login-register','App\Http\Controllers\DashboardController@loginRegister');
+Route::get('logout','App\Http\Controllers\DashboardController@logout');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard/tasks', [TaskController::class, 'tasks']);
+    Route::match(['get','post'],'/dashboard/tasks/new', [TaskController::class, 'newtask']);
 });
 
 require __DIR__.'/auth.php';
