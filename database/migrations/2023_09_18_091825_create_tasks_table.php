@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('type_id');
             $table->string('title');
             $table->string('description');
-            $table->enum('status',['pending','in_progress','completed']);
+            $table->enum('status',['pending','in_progress','completed','cancel']);
             $table->timestamp('due_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });

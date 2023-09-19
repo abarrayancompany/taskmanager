@@ -17,7 +17,8 @@ class TaskController extends Controller
 {
     public function tasks() {
         Session::put('page','tasks');
-        return view('tasks.tasks');
+        $tasks = Task::where('user_id',Auth::user()->id)->with('type')->get()->toArray();
+        return view('tasks.tasks')->with(compact('tasks'));
     }
     public function newtask(Request $request) {
         Session::put('page','new_task');
@@ -54,10 +55,30 @@ class TaskController extends Controller
             $task -> created_at = Carbon::now();
             $task -> updated_at = Carbon::now();
             $task -> save();
-            return redirect('dashboard/tasks')->with('success_massage','وظیفه جدید ایجاد شد!');
+            return redirect('dashboard/tasks')->with('success_message','وظیفه جدید ایجاد شد!');
     }
         //Get Task Types
         $types = TaskType::get()->toArray();
         return view('tasks.new')->with(compact('types'));
+    }
+
+    public function taskManage(Request $request) {
+        if ($request->isMethod("post")) {
+            $data = $request->all();
+            /* echo "<pre>"; print_r($data); die; */
+
+            if ($data['btn'] == 'completed' ) {
+                Task::where('id',$data['task_id'])->update(['status'=>'completed', 'updated_at'=> Carbon::now()]);
+                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر به اتمام رسید!');
+            }elseif ($data['btn'] == 'cancel' ) {
+                Task::where('id',$data['task_id'])->update(['status'=>'cancel', 'updated_at'=> Carbon::now()]);
+                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر لغو شد!');
+            }elseif ($data['btn'] == 'delete' ) {
+                $Task = Task::find($data['task_id']);
+                $Task->delete();
+                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر حذف شد!');
+            }
+
+        }
     }
 }
