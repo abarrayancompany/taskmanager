@@ -22,7 +22,6 @@
                         <thead>
                             <tr>
                                 <th>عنوان</th>
-                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
@@ -34,7 +33,6 @@
                         <tfoot>
                             <tr>
                                 <th>عنوان</th>
-                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
@@ -46,8 +44,10 @@
                         <tbody>
                             @foreach ($tasks as $task )
                             <tr>
-                                <td>{{$task['title']}}</td>
-                                <td>{{$task['description']}}</td>
+                                <td><a type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{{$task['description']}}">
+                                        {{$task['title']}}
+                                </a>
+                                </td>
                                 <td>{{$task['type']['name']}}</td>
                                 <td>{{$task['due_date']}}</td>
                                 <td>
