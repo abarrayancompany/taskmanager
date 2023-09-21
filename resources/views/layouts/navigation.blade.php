@@ -2,20 +2,16 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <a class="nav-link @if (session::get('page')=="dashboard") active @endif" href="{{url('dashboard')}}">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="bi bi-speedometer"></i></div>
                 داشبورد
             </a>
             <a class="nav-link @if (session::get('page')=="tasks") active @endif" href="{{url('dashboard/tasks')}}">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                <div class="sb-nav-link-icon"><i class="bi bi-list-task"></i></div>
                 وظایف
             </a>
             <a class="nav-link @if (session::get('page')=="new_task") active @endif" href="{{url('dashboard/tasks/new')}}">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="bi bi-plus-square-fill"></i></div>
                 ایجاد وظیفه جدید
-            </a>
-            <a class="nav-link @if (session::get('page')=="calendar") active @endif" href="{{url('dashboard/calendar')}}">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                تقویم
             </a>
         </div>
     </div>

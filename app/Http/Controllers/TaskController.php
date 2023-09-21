@@ -11,6 +11,7 @@ use Auth;
 use Validator;
 use Redirect;
 use Carbon\Carbon;
+use \Intervention\Image\Facades\Image;
 
 
 class TaskController extends Controller
@@ -25,8 +26,8 @@ class TaskController extends Controller
 
             if ($request->isMethod("post")) {
                 $data = $request->all();
-                /* echo "<pre>"; print_r($data); die; */
-
+                /* echo "<pre>"; print_r($data); die;
+ */
             //Validation
             $rules = [
                 'title' => 'required|max:100',
@@ -44,12 +45,29 @@ class TaskController extends Controller
             ];
             $this->validate($request,$rules,$custommassages);
 
+            // upload Task Image
+            if ($request->hasFile('task_image')) {
+                $image_tmp = $request->file('task_image');
+                if($image_tmp->isValid()){
+                    //get image extention
+                    $extention = $image_tmp->getClientOriginalExtension();
+                    //generete New Image Name
+                    $imageName = rand(111,99999).'.'.$extention;
+                    $imagePath = 'images/tasks/'.$imageName;
+                    //upload image
+                    Image::make($image_tmp)->save($imagePath);
+                }
+            }else {
+                $imageName ="";
+            }
+
             //New Task
             $task = New Task;
             $task -> user_id = Auth::user()->id;
             $task -> type_id = $data['type'];
             $task -> title = $data['title'];
             $task -> description = $data['description'];
+            $task -> photo = $imageName;
             $task -> status = $data['status'];
             $task -> due_date = $data['due_date'];
             $task -> created_at = Carbon::now();

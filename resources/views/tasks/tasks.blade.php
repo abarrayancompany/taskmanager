@@ -67,16 +67,22 @@
                                 <form action="{{url('dashboard/tasks/manage')}}" method="POST">@csrf
                                 <input type="hidden" name="task_id" value="{{$task['id']}}">
                                 @if ($task['status'] == 'completed')
-                                <a type="button" class="btn btn-sm btn-success disabled"><i class="bi bi-check icon-size"></i></a>
-                                <a type="button" class="btn btn-sm btn-danger disabled"><i class="bi bi-x-lg icon-size"></i></a>
+                                <a type="button" class="btn btn-sm btn-success disabled" title="اتمام"><i class="bi bi-check icon-size"></i></a>
+                                <a type="button" class="btn btn-sm btn-danger disabled" title="لغو"><i class="bi bi-x-lg icon-size"></i></a>
                                 @elseif ($task['status'] == 'cancel')
-                                <a type="button" class="btn btn-sm btn-success disabled"><i class="bi bi-check icon-size"></i></a>
-                                <a type="button" class="btn btn-sm btn-danger disabled"><i class="bi bi-x-lg icon-size"></i></a>
+                                <a type="button" class="btn btn-sm btn-success disabled" title="اتمام"><i class="bi bi-check icon-size"></i></a>
+                                <a type="button" class="btn btn-sm btn-danger disabled" title="لغو"><i class="bi bi-x-lg icon-size"></i></a>
                                 @else
-                                <button type="submit" class="btn btn-sm btn-success" name="btn" value="completed"><i class="bi bi-check icon-size"></i></button>
-                                <button type="submit" class="btn btn-sm btn-danger"  name="btn" value="cancel"><i class="bi bi-x-lg icon-size"></i></button>
+                                <button type="submit" class="btn btn-sm btn-success" title="اتمام" name="btn" value="completed"><i class="bi bi-check icon-size"></i></button>
+                                <button type="submit" class="btn btn-sm btn-danger" title="لغو"  name="btn" value="cancel"><i class="bi bi-x-lg icon-size"></i></button>
                                 @endif
-                                <button type="submit" class="btn btn-sm btn-warning" name="btn" value="delete"><i class="bi bi-trash icon-size"></i></button>
+                                <button type="submit" class="btn btn-sm btn-warning" title="حذف وظیفه" name="btn" value="delete"><i class="bi bi-trash icon-size"></i></button>
+                                @if (!empty($task['photo']))
+                                <a target="_blank" href="{{url('images/tasks/'.$task['photo'])}}" class="btn btn-sm btn-info"
+                                title="دانلود تصویر"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></a>
+                                @else
+                                <button type="submit" disabled class="btn btn-sm btn-info" name="btn" value="download"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></button>
+                                @endif
                                 </form>
                                 </td>
                             </tr>
@@ -85,4 +91,5 @@
                     </table>
                 </div>
             </div>
+        </div>
 @endsection

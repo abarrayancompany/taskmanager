@@ -19,7 +19,7 @@
                     ایجاد وظیفه
                 </div>
                 <div class="card-body">
-                    <form action="{{url('dashboard/tasks/new')}}" method="POST">@csrf
+                    <form action="{{url('dashboard/tasks/new')}}" method="POST" enctype="multipart/form-data">@csrf
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3 mb-md-0">
@@ -61,6 +61,9 @@
                             <input class="form-control" id="description" name="description" type="text" placeholder="توضیحات وظیفه را وارد کنید" />
                             <label for="inputLastName">توضیحات</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="task_image" name="task_image" type="file" value="">
+                        </div>
                         <div class="mt-4 mb-0">
                             <div class="d-grid"><button type="submit" class="btn btn-primary">ایجاد وظیفه</a></div>
                         </div>
@@ -71,4 +74,5 @@
                 jalaliDatepicker.startWatch();
                 separatorChars(object);
             </script>
+        </div>
 @endsection
