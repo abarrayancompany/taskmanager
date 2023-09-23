@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','App\Http\Controllers\DashboardController@index');
-Route::post('login-register','App\Http\Controllers\DashboardController@loginRegister');
+Route::post('login','App\Http\Controllers\DashboardController@login');
 Route::get('logout','App\Http\Controllers\DashboardController@logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

@@ -104,6 +104,36 @@ class DashboardController extends Controller
         }
     }
 }
+public function login(Request $request) {
+    if ($request->isMethod("post")) {
+        $data = $request->all();
+        echo "<pre>"; print_r($data); die;
+
+         //Validation
+         $rules = [
+            'student_code' => 'required|number|exists:users',
+            'password' => 'required',
+        ];
+
+        $customMessages =[
+            'student_code.required' => 'وارد کردن شماره دانشجویی الزامیست.',
+            'student_code.exists' => 'حساب کاربری برای شماره دانشجویی وارد شده وجود ندارد.',
+            'student_code.number' => 'شماره داشنجویی باید عددی باشد.',
+            'password.required' => 'رمز عبور ورود به سیستم را وارد کنید.',
+        ];
+        $validator = Validator::make($data,$rules,$customMessages);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+        if(Auth::attempt(['student_code'=>$data['student_code'],'password'=>$data['password']])) {
+            return redirect('dashboard');
+        }else {
+            $massage = 'نام کاربری یا رمز عبور وارد شده اشتباه است!';
+            return Redirect::back()->withErrors($massage);
+        }
+    }
+}
 
     //logout
     public function logout() {
