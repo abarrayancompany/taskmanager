@@ -32,4 +32,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/calendar', [CalendarController::class, 'index']);
 });
 
+    Route::prefix('/admin') ->namespace('App\Http\Controllers\Admin')->group(function(){
+        Route::match(['GET','POST'],'login','AdminController@login');
+        //Admin Group
+        Route::group(['middleware'=>['admin']],function(){
+            Route::get('dashboard','AdminController@dashboard');
+        });
+    });
+
 require __DIR__.'/auth.php';
