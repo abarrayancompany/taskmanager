@@ -57,7 +57,6 @@
                                 <tr>
                                     <th>عنوان</th>
                                     <th>نوع</th>
-                                    <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
                                 </tr>
@@ -66,7 +65,6 @@
                                 <tr>
                                     <th>عنوان</th>
                                     <th>نوع</th>
-                                    <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
                                 </tr>
@@ -79,7 +77,6 @@
                                     </a>
                                     </td>
                                     <td>{{$task['type']['name']}}</td>
-                                    <td>{{$task['due_date']}}</td>
                                     <td>
                                         @if ($task['status'] == 'in_progress' )
                                         <span class="badge bg-info text-dark">در حال انجام</span>
