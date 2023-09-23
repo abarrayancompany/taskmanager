@@ -5,17 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
 use Validator;
 use Redirect;
 use Auth;
 use Session;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
+
 
 class DashboardController extends Controller
 {
     public function index () {
         Session::put('page','dashboard');
         if(Auth::check()) {
-            return view('dashboard');
+        $tasks = Task::where('user_id',Auth::user()->id)->with('type')->get()->toArray();
+        $now = Verta::now()->format('Y-n-j');
+        $today_tasks = Task::where(['user_id'=>Auth::user()->id,'due_date'=>$now])->count();
+        $today_tasks_items = Task::with('type')->where(['user_id'=>Auth::user()->id,'due_date'=>$now])->get()->toArray();
+        //Get Tasks count
+        $task_count = Task::where('user_id',Auth::user()->id)->count();
+        $in_progress_tasks = Task::where(['user_id'=>Auth::user()->id,'status'=>'in_progress'])->count();
+        $completed_tasks = Task::where(['user_id'=>Auth::user()->id,'status'=>'completed'])->count();
+        $canceled_task = Task::where(['user_id'=>Auth::user()->id,'status'=>'cancel'])->count();
+        return view('dashboard')->with(compact('tasks','task_count','in_progress_tasks','completed_tasks','canceled_task','today_tasks_items'));
         }else {
         return view('index');
         }
