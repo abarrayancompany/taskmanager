@@ -52,4 +52,19 @@ class AdminController extends Controller
         $tasks = Task::with('type')->get()->toArray();
         return view('admin.tasks')->with(compact('tasks'));
     }
+    public function users() {
+        Session::put('page','users');
+        $users = User::get()->toArray();
+        return view('admin.users')->with(compact('users'));
+    }
+
+    public function userDelete(Request $request) {
+
+        if ($request->isMethod("post")) {
+            $data = $request->all();
+            $user = user::find($data['user_id']);
+                $user->delete();
+                return Redirect()->back()->with('success_message','کاربر مورد نظر حذف شد!');
+        }
+    }
 }

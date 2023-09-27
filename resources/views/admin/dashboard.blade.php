@@ -127,8 +127,8 @@
                                     <td>{{$user['student_code']}}</td>
                                     <td>{{$user['email']}}</td>
                                     <td>
-                                    <form action="{{url('dashboard/user/manage')}}" method="POST">@csrf
-                                    <input type="hidden" name="task_id" value="{{$user['id']}}">
+                                    <form action="{{url('admin/dashboard/user/delete')}}" method="POST">@csrf
+                                    <input type="hidden" name="user_id" value="{{$user['id']}}">
                                     <button type="submit" class="btn btn-sm btn-danger" title="حذف"  name="btn" value="delete"><i class="bi bi-x-lg icon-size"></i></button>
                                     </form>
                                     </td>

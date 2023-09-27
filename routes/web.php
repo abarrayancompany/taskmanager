@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
             Route::get('admin/dashboard',[AdminController::class, 'dashboard']);
             Route::get('admin/dashboard/tasks',[AdminController::class, 'tasks']);
             Route::post('admin/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
+            Route::get('admin/dashboard/users',[AdminController::class, 'users']);
+            Route::post('admin/dashboard/user/delete',[AdminController::class, 'userDelete']);
+
         });
 
 require __DIR__.'/auth.php';
