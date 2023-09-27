@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use illuminate\foundation\auth\user as authenticatable;
+use Illuminate\Foundation\Auth\User as authenticatable;
 
-class Admin extends Model
+class Admin extends authenticatable
 {
-    use HasFactory;
     protected $guard ='admin';
+    use HasFactory;
 }

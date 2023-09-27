@@ -23,11 +23,11 @@
                                         @include('_alert')
                                         <form action="{{url('admin/login')}}" method="POST">@csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="admin_email" name="admin_email" type="email" />
-                                                <label for="admin_email">ایمیل</label>
+                                                <input class="form-control" id="email" name="email" type="email" />
+                                                <label for="email">ایمیل</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="admin_password" name="admin_password" type="password" />
+                                                <input class="form-control" id="password" name="password" type="password" />
                                                 <label for="password">رمز عبور</label>
                                             </div>
                                             <div class="form-check mb-3">
