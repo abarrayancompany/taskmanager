@@ -57,6 +57,7 @@
                                 <tr>
                                     <th>عنوان</th>
                                     <th>نوع</th>
+                                    <th>نام کاربر</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                 </tr>
@@ -65,6 +66,7 @@
                                 <tr>
                                     <th>عنوان</th>
                                     <th>نوع</th>
+                                    <th>نام کاربر</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                 </tr>
@@ -77,6 +79,7 @@
                                     </a>
                                     </td>
                                     <td>{{$task['type']['name']}}</td>
+                                    <td>{{$task['user']['name']}}</td>
                                     <td>{{$task['due_date']}}</td>
                                     <td>
                                         @if ($task['status'] == 'in_progress' )
@@ -109,7 +112,6 @@
                                     <th>نام کاربر</th>
                                     <th>شماره دانشجویی</th>
                                     <th>ایمیل</th>
-                                    <th>اقدام</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -117,7 +119,6 @@
                                     <th>نام کاربر</th>
                                     <th>شماره دانشجویی</th>
                                     <th>ایمیل</th>
-                                    <th>اقدام</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -126,12 +127,7 @@
                                     <td>{{$user['name']}}</td>
                                     <td>{{$user['student_code']}}</td>
                                     <td>{{$user['email']}}</td>
-                                    <td>
-                                    <form action="{{url('admin/dashboard/user/delete')}}" method="POST">@csrf
-                                    <input type="hidden" name="user_id" value="{{$user['id']}}">
-                                    <button type="submit" class="btn btn-sm btn-danger" title="حذف"  name="btn" value="delete"><i class="bi bi-x-lg icon-size"></i></button>
-                                    </form>
-                                    </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>

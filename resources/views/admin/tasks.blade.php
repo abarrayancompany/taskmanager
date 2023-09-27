@@ -23,6 +23,8 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>نوع</th>
+                                <th>نام کاربر</th>
+                                <th>شماره دانشجویی</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ ایجاد</th>
@@ -34,6 +36,8 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>نوع</th>
+                                <th>نام کاربر</th>
+                                <th>شماره دانشجویی</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ ایجاد</th>
@@ -49,6 +53,8 @@
                                 </a>
                                 </td>
                                 <td>{{$task['type']['name']}}</td>
+                                <td>{{$task['user']['name']}}</td>
+                                <td>{{$task['user']['student_code']}}</td>
                                 <td>{{$task['due_date']}}</td>
                                 <td>
                                     @if ($task['status'] == 'in_progress' )

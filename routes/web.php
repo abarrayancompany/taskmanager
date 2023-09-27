@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
 });
 
-        Route::match(['GET','POST'],'login','App\Http\Controllers\AdminController@login');
+        Route::match(['GET','POST'],'admin/login','App\Http\Controllers\AdminController@login');
         //Admin Group
         Route::group(['middleware'=>['admin']],function(){
             Route::get('admin/dashboard',[AdminController::class, 'dashboard']);
@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
             Route::post('admin/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
             Route::get('admin/dashboard/users',[AdminController::class, 'users']);
             Route::post('admin/dashboard/user/delete',[AdminController::class, 'userDelete']);
+            Route::match(['get','post'],'admin/dashboard/user/new', [AdminController::class, 'newUser']);
+            Route::get('admin/logout',[AdminController::class, 'logout']);
+
 
         });
 
