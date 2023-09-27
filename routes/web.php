@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -29,15 +29,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/tasks', [TaskController::class, 'tasks']);
         Route::match(['get','post'],'/dashboard/tasks/new', [TaskController::class, 'newtask']);
         Route::post('/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
-        Route::get('/dashboard/calendar', [CalendarController::class, 'index']);
 });
 
-    Route::prefix('/admin') ->namespace('App\Http\Controllers\Admin')->group(function(){
-        Route::match(['GET','POST'],'login','AdminController@login');
+        Route::match(['GET','POST'],'login','App\Http\Controllers\AdminController@login');
         //Admin Group
         Route::group(['middleware'=>['admin']],function(){
-            Route::get('dashboard','AdminController@dashboard');
+            Route::get('admin/dashboard',[AdminController::class, 'dashboard']);
+            Route::get('admin/dashboard/tasks',[AdminController::class, 'tasks']);
+            Route::post('admin/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
         });
-    });
 
 require __DIR__.'/auth.php';

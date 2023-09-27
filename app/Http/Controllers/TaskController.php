@@ -73,7 +73,7 @@ class TaskController extends Controller
             $task -> created_at = Carbon::now();
             $task -> updated_at = Carbon::now();
             $task -> save();
-            return redirect('dashboard/tasks')->with('success_message','وظیفه جدید ایجاد شد!');
+            return Redirect()->back()->with('success_message','وظیفه جدید ایجاد شد!');
     }
         //Get Task Types
         $types = TaskType::get()->toArray();
@@ -87,14 +87,14 @@ class TaskController extends Controller
 
             if ($data['btn'] == 'completed' ) {
                 Task::where('id',$data['task_id'])->update(['status'=>'completed', 'updated_at'=> Carbon::now()]);
-                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر به اتمام رسید!');
+                return Redirect()->back()->with('success_message','وظیفه مورد نظر به اتمام رسید!');
             }elseif ($data['btn'] == 'cancel' ) {
                 Task::where('id',$data['task_id'])->update(['status'=>'cancel', 'updated_at'=> Carbon::now()]);
-                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر لغو شد!');
+                return Redirect()->back()->with('success_message','وظیفه مورد نظر لغو شد!');
             }elseif ($data['btn'] == 'delete' ) {
                 $Task = Task::find($data['task_id']);
                 $Task->delete();
-                return redirect('dashboard/tasks')->with('success_message','وظیفه مورد نظر حذف شد!');
+                return Redirect()->back()->with('success_message','وظیفه مورد نظر حذف شد!');
             }
 
         }
