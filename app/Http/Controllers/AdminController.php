@@ -110,6 +110,38 @@ class AdminController extends Controller
         }
     }
 
+    public function admins() {
+        Session::put('page','admins');
+        $admins = Admin::get()->toArray();
+        return view('admin.admins')->with(compact('admins'));
+    }
+
+    public function adminManage(Request $request) {
+        if ($request->isMethod("post")) {
+            $data = $request->all();
+            $curren_admin_id = Auth::guard('admin')->user()->id;
+            if ($data['btn'] == 'delete' ) {
+                $admin = Admin::find($data['admin_id']);
+                if($data['admin_id'] == $curren_admin_id) {
+                    return Redirect()->back()->with('error_message','شما نمی‌توانید حساب کاربری خود را حذف کنید!');
+                }else {
+                    $admin->delete();
+                    return Redirect()->back()->with('success_message','ادمین مورد نظر حذف شد!');
+                }
+            }elseif($data['btn'] == 'status0') {
+                if($data['admin_id'] == $curren_admin_id) {
+                    return Redirect()->back()->with('error_message','شما نمی‌توانید حساب کاربری خود را غیرفعال کنید!');
+                }else {
+                Admin::where('id',$data['admin_id'])->update(['status'=>0]);
+                return Redirect()->back()->with('success_message','ادمین غیرفعال شد!');
+                }
+            }elseif($data['btn'] == 'status1') {
+                Admin::where('id',$data['admin_id'])->update(['status'=>1]);
+                return Redirect()->back()->with('success_message','ادمین فعال شد!');
+            }
+        }
+    }
+
     //logout function
     public function logout() {
         Auth::guard('admin')->logout();

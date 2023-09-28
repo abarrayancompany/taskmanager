@@ -18,11 +18,18 @@
                 <div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>
                 افزودن کاربر جدید
             </a>
-
+            <a class="nav-link @if (session::get('page')=="admins") active @endif" href="{{url('admin/dashboard/admins')}}">
+                <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
+                مدیران سایت
+            </a>
+            <a class="nav-link @if (session::get('page')=="new_admin") active @endif" href="{{url('admin/dashboard/admin/new')}}">
+                <div class="sb-nav-link-icon"><i class="bi bi-person-plus-fill"></i></div>
+                افزودن مدیر جدید
+            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">
-        <div class="small">فرشید اصلانی عزیز خوش‌آمدید</div>
+        <div class="small">{{Auth::guard('admin')->user()->name}} عزیز خوش‌آمدید</div>
         <a style="float:left; color:white;" href="{{url('admin/logout')}}">خروج</a>
     </div>
 </nav>
