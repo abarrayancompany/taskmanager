@@ -35,7 +35,9 @@
                                                 <label class="form-check-label" for="inputRememberPassword">مرا بخاطر بسپار</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button type="submit" class="btn btn-primary">ورود به سیستم</a>
+                                                <button type="submit" class="btn btn-primary">ورود به سیستم</button>
+                                                    <a href="{{url('admin/login')}}" class="btn btn-light">رفتن به پنل ادمین</a>
+
                                             </div>
                                         </form>
                                         </div>
