@@ -87,14 +87,14 @@ class AdminController extends Controller
 
 
             //New User
-            $task = New User;
-            $task -> name = $data['name'];
-            $task -> email = $data['email'];
-            $task -> student_code  = $data['student_code'];
-            $task -> password = bcrypt($data['user_password']);
-            $task -> created_at = Carbon::now();
-            $task -> updated_at = Carbon::now();
-            $task -> save();
+            $user = New User;
+            $user -> name = $data['name'];
+            $user -> email = $data['email'];
+            $user -> student_code  = $data['student_code'];
+            $user -> password = bcrypt($data['user_password']);
+            $user -> created_at = Carbon::now();
+            $user -> updated_at = Carbon::now();
+            $user -> save();
             return redirect('admin/dashboard/users')->with('success_message','کاربر جدید ایجاد شد!');
     }
         return view('admin.new_user');
@@ -141,6 +141,47 @@ class AdminController extends Controller
             }
         }
     }
+
+    public function newAdmin(Request $request) {
+        Session::put('page','new_admin');
+
+            if ($request->isMethod("post")) {
+                $data = $request->all();
+                /* echo "<pre>"; print_r($data); die;
+ */
+            //Validation
+            $rules = [
+                'name' => 'required|max:100',
+                'email' => 'required|email|max:255|unique:admins',
+                'password' => 'required',
+            ];
+
+            $custommassages =[
+                'name.required' => 'وارد کردن نام الزامیست.',
+                'email.required' => 'ایمیل الزامیست .',
+                'email.email' => 'فرمت ایمیل صحیح نیست .',
+                'email.max' => 'آدرس ایمیل بیش از حد است .',
+                'email.unique' => 'این ایمیل قبلا ثبت شده است .',
+                'password.required' => 'رمز عبور الزامیست.',
+            ];
+            $this->validate($request,$rules,$custommassages);
+
+
+            //New User
+            $admin = New Admin;
+            $admin -> name = $data['name'];
+            $admin -> email = $data['email'];
+            $admin -> password = bcrypt($data['password']);
+            $admin -> status = 1;
+            $admin -> created_at = Carbon::now();
+            $admin -> updated_at = Carbon::now();
+            $admin -> save();
+            return redirect('admin/dashboard/admins')->with('success_message','ادمین جدید ایجاد شد!');
+    }
+        return view('admin.new_admin');
+    }
+
+
 
     //logout function
     public function logout() {
