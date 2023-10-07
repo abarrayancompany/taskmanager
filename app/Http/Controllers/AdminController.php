@@ -181,6 +181,14 @@ class AdminController extends Controller
         return view('admin.new_admin');
     }
 
+    //Get Users Tasks
+    public function userTasks($id) {
+        Session::put('page','users');
+        $user_tasks = Task::where('user_id',$id)->with('user','type')->get()->toArray();
+        $user_detail = User::where('id',$id)->get()->first();
+        return view('admin.user_tasks')->with(compact('user_tasks','user_detail'));
+    }
+
 
 
     //logout function

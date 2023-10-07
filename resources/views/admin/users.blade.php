@@ -51,6 +51,8 @@
                                     <form action="{{url('admin/dashboard/user/delete')}}" method="POST">@csrf
                                     <input type="hidden" name="user_id" value="{{$user['id']}}">
                                     <button type="submit" class="btn btn-sm btn-danger" title="حذف"  name="btn" value="delete"><i class="bi bi-x-lg icon-size"></i></button>
+                                    <a  href="{{url('admin/users/tasks/'.$user['id'])}}" class="btn btn-sm btn-info"
+                                    title="مشاهده وظایف کاربر"><i class="bi bi-list-task icon-size"></i></a>
                                     </form>
                                 </td>
                             </tr>

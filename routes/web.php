@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
             Route::get('admin/dashboard/admins',[AdminController::class, 'admins']);
             Route::post('admin/dashboard/admin/manage',[AdminController::class, 'adminManage']);
             Route::match(['get','post'],'admin/dashboard/admin/new', [AdminController::class, 'newAdmin']);
+            Route::get('admin/users/tasks/{id}',[AdminController::class, 'userTasks']);
             Route::get('admin/logout',[AdminController::class, 'logout']);
 
 
