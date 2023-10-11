@@ -22,6 +22,7 @@
                         <thead>
                             <tr>
                                 <th>عنوان</th>
+                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>نام کاربر</th>
                                 <th>شماره دانشجویی</th>
@@ -35,6 +36,7 @@
                         <tfoot>
                             <tr>
                                 <th>عنوان</th>
+                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>نام کاربر</th>
                                 <th>شماره دانشجویی</th>
@@ -52,6 +54,7 @@
                                         {{$task['title']}}
                                 </a>
                                 </td>
+                                <td>{{$task['description']}}</td>
                                 <td>{{$task['type']['name']}}</td>
                                 <td>{{$task['user']['name']}}</td>
                                 <td>{{$task['user']['student_code']}}</td>

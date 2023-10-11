@@ -23,6 +23,7 @@
                         <thead>
                             <tr>
                                 <th>عنوان</th>
+                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
@@ -34,6 +35,7 @@
                         <tfoot>
                             <tr>
                                 <th>عنوان</th>
+                                <th>توضیحات</th>
                                 <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
@@ -49,6 +51,7 @@
                                         {{$task['title']}}
                                 </a>
                                 </td>
+                                <td>{{$task['description']}}</td>
                                 <td>{{$task['type']['name']}}</td>
                                 <td>{{$task['due_date']}}</td>
                                 <td>
