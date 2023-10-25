@@ -29,30 +29,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-control" name="type" id="type" placeholder="نوع وظیفه را انتخاب کنید">
-                                        <option>نوع وظیفه را انتخاب کنید</option>
-                                        @foreach ($types as $type)
-                                            <option value="{{$type['id']}}">{{$type['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3 mb-md-0">
-                                    <input data-jdp class="form-control" id="due_date" name="due_date" type="text" placeholder="تاریخ وظیفه را مشخص کنید" />
-                                    <label for="inputFirstName">تاریخ انجام</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <select class="form-control" name="status" id="status" placeholder="وضعیت را انتخاب کنید">
                                         <option>وضعیت وظیفه را انتخاب کنید</option>
                                             <option value="pending">در انتظار بررسی</option>
                                             <option value="in_progress">در حال انجام</option>
                                             <option value="completed">تکمیل شده</option>
-
                                     </select>
                                 </div>
                             </div>

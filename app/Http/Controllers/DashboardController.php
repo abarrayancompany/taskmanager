@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index () {
         Session::put('page','dashboard');
         if(Auth::check()) {
-        $tasks = Task::where('user_id',Auth::user()->id)->with('type')->get()->toArray();
+        $tasks = Task::where('user_id',Auth::user()->id)->get()->toArray();
         $now = Verta::now()->format('Y-n-j');
         $today_tasks = Task::where(['user_id'=>Auth::user()->id,'due_date'=>$now])->count();
         $today_tasks_items = Task::with('type')->where(['user_id'=>Auth::user()->id,'due_date'=>$now])->get()->toArray();

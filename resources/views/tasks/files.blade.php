@@ -19,7 +19,13 @@
                     فایل های وظیفه {{$task['title']}}
                 </div>
                 <div class="card-body">
-                    <form class="form form-horizontal" action="{{url('tasks/files/upload')}}" method="post"enctype="multipart/form-data"> @csrf
+                    <form class="form form-horizontal"
+                    @if (Auth::guard('web')->check())
+                    action="{{url('tasks/files/upload')}}"
+                    @else
+                    action="{{url('admin/tasks/files/upload')}}"
+                    @endif
+                     method="post"enctype="multipart/form-data"> @csrf
                         <div class="form-body">
                               <div class="row">
                                 <div class="col-md-6">

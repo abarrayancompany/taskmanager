@@ -56,7 +56,6 @@
                             <thead>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
                                 </tr>
@@ -64,7 +63,6 @@
                             <tfoot>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
                                 </tr>
@@ -76,7 +74,6 @@
                                             {{$task['title']}}
                                     </a>
                                     </td>
-                                    <td>{{$task['type']['name']}}</td>
                                     <td>
                                         @if ($task['status'] == 'in_progress' )
                                         <span class="badge bg-info text-dark">در حال انجام</span>
@@ -128,7 +125,6 @@
                             <thead>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
@@ -137,7 +133,6 @@
                             <tfoot>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
                                     <th>اقدام</th>
@@ -150,7 +145,6 @@
                                             {{$task['title']}}
                                     </a>
                                     </td>
-                                    <td>{{$task['type']['name']}}</td>
                                     <td>{{$task['due_date']}}</td>
                                     <td>
                                         @if ($task['status'] == 'in_progress' )

@@ -23,7 +23,6 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>توضیحات</th>
-                                <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ ایجاد</th>
@@ -35,7 +34,6 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>توضیحات</th>
-                                <th>نوع</th>
                                 <th>تاریخ انجام</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ ایجاد</th>
@@ -51,8 +49,13 @@
                                 </a>
                                 </td>
                                 <td>{{$task['description']}}</td>
-                                <td>{{$task['type']['name']}}</td>
-                                <td>{{$task['due_date']}}</td>
+                                <td>
+                                    @if (!empty($task['due_date']))
+                                    {{$task['due_date']}}
+                                    @else
+                                    <span class="badge bg-danger">تاریخ تعین نشده است</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($task['status'] == 'in_progress' )
                                     <span class="badge bg-info text-dark">در حال انجام</span>

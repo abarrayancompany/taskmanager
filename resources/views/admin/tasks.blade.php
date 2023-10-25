@@ -23,7 +23,6 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>توضیحات</th>
-                                <th>نوع</th>
                                 <th>نام کاربر</th>
                                 <th>شماره دانشجویی</th>
                                 <th>تاریخ انجام</th>
@@ -37,7 +36,6 @@
                             <tr>
                                 <th>عنوان</th>
                                 <th>توضیحات</th>
-                                <th>نوع</th>
                                 <th>نام کاربر</th>
                                 <th>شماره دانشجویی</th>
                                 <th>تاریخ انجام</th>
@@ -55,10 +53,11 @@
                                 </a>
                                 </td>
                                 <td>{{$task['description']}}</td>
-                                <td>{{$task['type']['name']}}</td>
                                 <td>{{$task['user']['name']}}</td>
                                 <td>{{$task['user']['student_code']}}</td>
-                                <td>{{$task['due_date']}}</td>
+                                <td>
+                                    <input data-jdp type="text" class="form form-control" name="due_date" value="{{$task['due_date']}}">
+                                </td>
                                 <td>
                                     @if ($task['status'] == 'in_progress' )
                                     <span class="badge bg-info text-dark">در حال انجام</span>
@@ -86,7 +85,7 @@
                                 <button type="submit" class="btn btn-sm btn-danger" title="لغو"  name="btn" value="cancel"><i class="bi bi-x-lg icon-size"></i></button>
                                 @endif
                                 <button type="submit" class="btn btn-sm btn-warning" title="حذف وظیفه" name="btn" value="delete"><i class="bi bi-trash icon-size"></i></button>
-                                <a href="{{url('tasks/files/'.$task['id'])}}" class="btn btn-sm btn-info"
+                                <a href="{{url('admin/tasks/files/'.$task['id'])}}" class="btn btn-sm btn-info"
                                 title="مشاهده فایل ها"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></a>
                                 </form>
                                 </td>

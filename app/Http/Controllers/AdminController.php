@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function dashboard() {
         Session::put('page','dashboard');
-        $tasks = Task::with('type','user')->get()->toArray();
+        $tasks = Task::with('user')->get()->toArray();
         //Get Tasks count
         $task_count = Task::count();
         $in_progress_tasks = Task::where(['status'=>'in_progress'])->count();
@@ -49,7 +49,7 @@ class AdminController extends Controller
 
     public function tasks() {
         Session::put('page','tasks');
-        $tasks = Task::with('type','user')->get()->toArray();
+        $tasks = Task::with('user')->get()->toArray();
         return view('admin.tasks')->with(compact('tasks'));
     }
     public function users() {
@@ -184,7 +184,7 @@ class AdminController extends Controller
     //Get Users Tasks
     public function userTasks($id) {
         Session::put('page','users');
-        $user_tasks = Task::where('user_id',$id)->with('user','type')->get()->toArray();
+        $user_tasks = Task::where('user_id',$id)->with('user')->get()->toArray();
         $user_detail = User::where('id',$id)->get()->first();
         return view('admin.user_tasks')->with(compact('user_tasks','user_detail'));
     }

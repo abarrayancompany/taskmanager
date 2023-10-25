@@ -56,7 +56,6 @@
                             <thead>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>نام کاربر</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
@@ -65,7 +64,6 @@
                             <tfoot>
                                 <tr>
                                     <th>عنوان</th>
-                                    <th>نوع</th>
                                     <th>نام کاربر</th>
                                     <th>تاریخ انجام</th>
                                     <th>وضعیت</th>
@@ -78,7 +76,6 @@
                                             {{$task['title']}}
                                     </a>
                                     </td>
-                                    <td>{{$task['type']['name']}}</td>
                                     <td>{{$task['user']['name']}}</td>
                                     <td>{{$task['due_date']}}</td>
                                     <td>
