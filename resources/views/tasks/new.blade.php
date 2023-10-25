@@ -62,7 +62,7 @@
                             <label for="inputLastName">توضیحات</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="task_image" name="task_image" type="file" value="">
+                            <input class="form-control" id="file[]" name="file[]" type="file" value="" multiple>
                         </div>
                         <div class="mt-4 mb-0">
                             <div class="d-grid"><button type="submit" class="btn btn-primary">ایجاد وظیفه</a></div>

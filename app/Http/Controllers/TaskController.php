@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\TaskType;
+use App\Models\File;
 use App\Models\User;
 use Session;
 use Auth;
@@ -26,8 +27,7 @@ class TaskController extends Controller
 
             if ($request->isMethod("post")) {
                 $data = $request->all();
-                /* echo "<pre>"; print_r($data); die;
- */
+                /* echo "<pre>"; print_r($data); die; */
             //Validation
             $rules = [
                 'title' => 'required|max:100',
@@ -45,9 +45,24 @@ class TaskController extends Controller
             ];
             $this->validate($request,$rules,$custommassages);
 
+
+            //New Task
+            $task = New Task;
+            $task -> user_id = Auth::user()->id;
+            $task -> type_id = $data['type'];
+            $task -> title = $data['title'];
+            $task -> description = $data['description'];
+            $task -> status = $data['status'];
+            $task -> due_date = $data['due_date'];
+            $task -> created_at = Carbon::now();
+            $task -> updated_at = Carbon::now();
+            $task -> save();
+
             // upload Task Image
-            if ($request->hasFile('task_image')) {
-                $image_tmp = $request->file('task_image');
+            if (!empty($data['file'])) {
+            $files = $data['file'];
+            foreach ($files as $file) {
+                $image_tmp = $file;
                 if($image_tmp->isValid()){
                     //get image extention
                     $extention = $image_tmp->getClientOriginalExtension();
@@ -57,22 +72,14 @@ class TaskController extends Controller
                     //upload image
                     Image::make($image_tmp)->save($imagePath);
                 }
-            }else {
-                $imageName ="";
+            $file = New File;
+            $file -> task_id = $task->id;
+            $file -> file = $imageName;
+            $file -> created_at = Carbon::now();
+            $file -> updated_at = Carbon::now();
+            $file -> save();
             }
-
-            //New Task
-            $task = New Task;
-            $task -> user_id = Auth::user()->id;
-            $task -> type_id = $data['type'];
-            $task -> title = $data['title'];
-            $task -> description = $data['description'];
-            $task -> photo = $imageName;
-            $task -> status = $data['status'];
-            $task -> due_date = $data['due_date'];
-            $task -> created_at = Carbon::now();
-            $task -> updated_at = Carbon::now();
-            $task -> save();
+        }
             return Redirect()->back()->with('success_message','وظیفه جدید ایجاد شد!');
     }
         //Get Task Types
