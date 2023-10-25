@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/tasks', [TaskController::class, 'tasks']);
         Route::match(['get','post'],'/dashboard/tasks/new', [TaskController::class, 'newtask']);
         Route::post('/dashboard/tasks/manage',[TaskController::class, 'taskManage']);
+        Route::get('tasks/files/{id?}',[TaskController::class, 'filesIndex']);
+        Route::post('tasks/files/upload',[TaskController::class, 'fileUpload']);
 });
 
         Route::match(['GET','POST'],'admin/login','App\Http\Controllers\AdminController@login');

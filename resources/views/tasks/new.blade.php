@@ -65,7 +65,7 @@
                             <input class="form-control" id="file[]" name="file[]" type="file" value="" multiple>
                         </div>
                         <div class="mt-4 mb-0">
-                            <div class="d-grid"><button type="submit" class="btn btn-primary">ایجاد وظیفه</a></div>
+                            <div class="d-grid"><button type="submit" class="btn btn-primary">ایجاد وظیفه</button></div>
                         </div>
                     </form>
                 </div>

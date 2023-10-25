@@ -80,12 +80,8 @@
                                 <button type="submit" class="btn btn-sm btn-danger" title="لغو"  name="btn" value="cancel"><i class="bi bi-x-lg icon-size"></i></button>
                                 @endif
                                 <button type="submit" class="btn btn-sm btn-warning" title="حذف وظیفه" name="btn" value="delete"><i class="bi bi-trash icon-size"></i></button>
-                                @if (!empty($task['photo']))
-                                <a target="_blank" href="{{url('images/tasks/'.$task['photo'])}}" class="btn btn-sm btn-info"
-                                title="دانلود تصویر"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></a>
-                                @else
-                                <button type="submit" disabled class="btn btn-sm btn-info" name="btn" value="download"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></button>
-                                @endif
+                                <a href="{{url('tasks/files/'.$task['id'])}}" class="btn btn-sm btn-info"
+                                title="مشاهده فایل ها"><i class="bi bi-file-earmark-arrow-down-fill icon-size"></i></a>
                                 </form>
                                 </td>
                             </tr>

@@ -106,4 +106,43 @@ class TaskController extends Controller
 
         }
     }
+
+    public function filesIndex($id){
+        $task = Task::find($id);
+        $taskFiles = File::where('task_id',$id)->get()->toArray();
+        /* dd($productFile); */
+        return view('tasks.files')->with(compact('task','taskFiles'));
+    }
+
+    public function fileUpload(Request $request) {
+        if ($request->isMethod("post")) {
+            $data = $request->all();
+            /* echo "<pre>"; print_r($data); die; */
+            // upload Task Image
+            if (!empty($data['file'])) {
+            $files = $data['file'];
+            foreach ($files as $file) {
+                $image_tmp = $file;
+                if($image_tmp->isValid()){
+                    //get image extention
+                    $extention = $image_tmp->getClientOriginalExtension();
+                    //generete New Image Name
+                    $imageName = rand(111,99999).'.'.$extention;
+                    $imagePath = 'images/tasks/'.$imageName;
+                    //upload image
+                    Image::make($image_tmp)->save($imagePath);
+                }
+            $file = New File;
+            $file -> task_id = $data['task_id'];
+            $file -> file = $imageName;
+            $file -> created_at = Carbon::now();
+            $file -> updated_at = Carbon::now();
+            $file -> save();
+            }
+        }
+            return Redirect()->back()->with('success_message','بارگزاری فایل ها انجام شد!');
+
+        }
+
+    }
 }
