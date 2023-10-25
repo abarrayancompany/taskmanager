@@ -95,6 +95,9 @@ class TaskController extends Controller
                 $Task = Task::find($data['task_id']);
                 $Task->delete();
                 return Redirect()->back()->with('success_message','وظیفه مورد نظر حذف شد!');
+            }elseif ($data['btn'] == 'date' ) {
+                Task::where('id',$data['task_id'])->update(['due_date'=>$data['due_date'], 'updated_at'=> Carbon::now()]);
+                return Redirect()->back()->with('success_message','تاریخ مد نظر برای این وظیفه ثبت شد!');
             }
 
         }

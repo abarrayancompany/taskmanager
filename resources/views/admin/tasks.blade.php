@@ -56,7 +56,11 @@
                                 <td>{{$task['user']['name']}}</td>
                                 <td>{{$task['user']['student_code']}}</td>
                                 <td>
-                                    <input data-jdp type="text" class="form form-control" name="due_date" value="{{$task['due_date']}}">
+                                    <form action="{{url('admin/dashboard/tasks/manage')}}" method="POST">@csrf
+                                    <input type="hidden" name="task_id" value="{{$task['id']}}">
+                                    <input data-jdp type="text" class="form form-control" name="due_date" id="due_date" value="{{$task['due_date']}}">
+                                    <button type="submit" class="btn btn-primary btn-sm" name="btn" value="date">اعمال</button>
+                                    </form>
                                 </td>
                                 <td>
                                     @if ($task['status'] == 'in_progress' )
@@ -96,4 +100,8 @@
                 </div>
             </div>
         </div>
+        <script>
+            jalaliDatepicker.startWatch();
+            separatorChars(object);
+        </script>
 @endsection

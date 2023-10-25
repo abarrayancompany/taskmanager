@@ -51,9 +51,5 @@
                     </form>
                 </div>
             </div>
-            <script>
-                jalaliDatepicker.startWatch();
-                separatorChars(object);
-            </script>
         </div>
 @endsection
